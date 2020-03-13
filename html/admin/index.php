@@ -38,13 +38,22 @@ a:hover{	background-color: #ddd ;
 <body>
 <center>
 ADMINISTRATION
-<a href = "localhost" class= "white" ><img src = "home.png" height = "50px" </a>
+<a href = "http://tritech.io" class= "white" ><img src = "home.png" height = "50px" </a>
 <a href = "index.php?v=0" class = "menu" >python 3.7* http:8000</a>&nbsp; 
 <a href = "index.php?v=1" class = "menu" >python 3.6* http:8000</a>&nbsp;
 <a href = "index.php?v=2" class = "menu" >CHECK PS</a>&nbsp; 
 <a href = "index.php?v=3" class = "menu" >stop ps http:8000 </a>&nbsp;
+<a href = "index.php?v=4" class = "menu" > start tcpdump </a>&nbsp;
+<a href = "index.php?v=5" class = "menu" > stop tcpdump </a>&nbsp;
+<a href = "index.php?v=6" class = "menu" >html update</a>&nbsp;
+<a href = "index.php?v=7" class = "menu" > ls -l </a>&nbsp;
 <hr />
-
+<?php 
+echo date('m/d/Y H:i:s', time()); 
+$filename = date('mdY-His', time());
+echo " Filename: $filename" ;
+?> 
+<hr />
 <?php
 if (isset($_GET['v'])) {
 	$thepost = $_GET['v']; // Default page
@@ -54,44 +63,74 @@ if (isset($_GET['v'])) {
 	
 if ($thepost == -1) {
 	$output = shell_exec('cal');
-	 echo "OUTPUT";
-	echo "<pre>$output</pre>";
+	 echo "<pre>OUTPUT";
+	echo "$output";
+	echo"</pre>";
 }
 if ($thepost == 0) {
 	$output = shell_exec('nohup python3 -m http.server 8000  --directory web >> /dev/null 2>&1 &');
-	 echo "OUTPUT";
-	echo "<pre>$output</pre>";
+	 echo "<pre>OUTPUT";
+	echo "$output";
+	echo"</pre>";
 }
 
 if ($thepost == 1) {
         $output = shell_exec('cd web; nohup python3 -m http.server 8000  >> /dev/null 2>&1 &');
-         echo "OUTPUT";
-        echo "<pre>$output</pre>";
+        echo "<pre>OUTPUT";
+	echo "$output";
+	echo"</pre>";
 }
 
 
 if ($thepost == 2) {
 	$output = shell_exec('ps');
-	 echo "OUTPUT";
-	echo "<pre>$output</pre>";
+	 echo "<pre>OUTPUT";
+	echo "$output";
+	echo"</pre>";
 }
 if ($thepost == 3) {
         $output = shell_exec('pkill  python3');
-	 echo "OUTPUT";
-        echo "<pre>$output</pre>";
+	 echo "<pre>OUTPUT";
+	echo "$output";
+	echo"</pre>";
 }
 
 if ($thepost == 4) {
-        $output = shell_exec('cat DataOutput.txt');
-         echo "OUTPUT";
-        echo "<pre>$output</pre>";
+	//      tcpdump -w 200306-0937.pcap -i eth0 
+		$output = 'nohup  /home/cwc/http/ec2html/admin/tcpdmp.sh >> /dev/null 2>&1 &' ;
+		//$tcpdmp = 'nohup tcpdump -w 03122020-013129.pcap -i enp2s0 &';
+		
+		//$tcpdmp = 'touch /home/cwc/http/ec2html/admin/'.$filename ;
+		echo "tcpdump string = $output";
+        echo shell_exec('/home/cwc/http/ec2html/admin/tcpdmp.sh');
+         echo "<pre>OUTPUT";
+        //echo "<pre>$output</pre>";
+         print_r($output);
 }
 
-if ($thepost == 4) {
-        $output = shell_exec('./LinuxTestBuildV1_51.x86_64');
-			//     ./LinuxTestBuildV1_32.x86_64
-         echo "OUTPUT";
-        echo "<pre>$output</pre>";
+if ($thepost == 5) {
+      $output = shell_exec('/home/cwc/http/ec2html/admin/tcpdmp.sh');
+      print_r($output);
+      echo "<pre>OUTPUT";
+	//echo "$output";
+	echo"</pre>";
+}
+
+if ($thepost == 6) {
+        $command = '/var/www/html/admin/getec2html.sh';
+        $output = shell_exec($command);
+        echo "<pre>OUTPUT";
+        echo "$output";
+        echo"</pre>";
+}
+
+
+if ($thepost == 7) {
+	$ls = "ls -l;date;";
+	$output = shell_exec($ls);
+	echo "<pre>OUTPUT";
+	echo "$output";
+	echo"</pre>";
 }
 
 ?>

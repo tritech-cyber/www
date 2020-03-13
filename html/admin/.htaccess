@@ -1,7 +1,4 @@
-Options +Indexes
-IndexOptions FancyIndexing FoldersFirst NameWidth=* DescriptionWidth=*
-
 AuthName "admin"
 AuthType Basic
-AuthUserFile /home/security/pwfile
+AuthUserFile /etc/httpd/pwadmin
 Require user admin

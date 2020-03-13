@@ -35,17 +35,10 @@ a:hover{	background-color: #dc322f; ;
 <body>
 <center>
 <a href = "localhost" class= "white" ><img src = "home.png" height = "50px" </a>
-<a href = "https://www.tcpdump.org/" >tcpdump.org</a>&nbsp; 
-<a href = "https://www.redhat.com"  >REDHAT</a>&nbsp; 
-<a href = "https://www.centos.org/"  >CENTOS </a>&nbsp;
-<a href = "https://getfedora.org/"  >FEDORA </a>&nbsp;
-<hr />
 <a href = "files/"  >files </a>&nbsp;
 <a href = "data/"  >data </a>&nbsp;
-
-<hr />
+<a href = "http://tritech.io:8000" target = "_blank"> *:8000</a>
 <a href = "admin/"  > ADMINISTRATION </a>&nbsp;
-
 <hr />
 <?php
 if (isset($_GET['v'])) {
@@ -90,6 +83,8 @@ if ($thepost == 4) {
 
 ?>
 <hr />
+
+<?php include "nav.html" ?>
 <pre>
 	python3 -m http.server 8000
 	
@@ -106,8 +101,13 @@ cp -fR /home/zoey/ec2html/* /var/www/html/;
 add this to /var/www/html/data/.htaccess
 Options +Indexes
 IndexOptions FancyIndexing FoldersFirst NameWidth=* DescriptionWidth=*
-
-
 </pre>
+<center>
+<a href = "https://www.tcpdump.org/" >tcpdump.org</a>&nbsp; 
+<a href = "https://www.redhat.com"  >REDHAT</a>&nbsp; 
+<a href = "https://www.centos.org/"  >CENTOS </a>&nbsp;
+<a href = "https://getfedora.org/"  >FEDORA </a>&nbsp;
+</center>
+
 </body>
 </html>
